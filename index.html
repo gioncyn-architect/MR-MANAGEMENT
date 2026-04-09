@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MR MASTER - ROYAL IVORY</title>
 
 <style>
@@ -185,6 +184,15 @@ background:#fff;
 border:1px solid rgba(212,175,55,.3);
 border-radius:12px;
 overflow:hidden;
+transition: transform 0.2s, border 0.3s;
+height: fit-content;
+}
+
+.accordion-item.active {
+border: 1px solid #d4af37;
+box-shadow: 0 5px 15px rgba(212,175,55,0.1);
+transform: scale(1.02);
+z-index: 10;
 }
 
 .accordion-header{
@@ -194,9 +202,11 @@ border:none;
 padding:15px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 font-size:.7rem;
 font-weight:900;
 cursor:pointer;
+text-align: left;
 }
 
 .arrow{
@@ -206,6 +216,8 @@ border-right:2px solid #d4af37;
 border-bottom:2px solid #d4af37;
 transform:rotate(45deg);
 transition:.3s;
+flex-shrink: 0;
+margin-left: 5px;
 }
 
 .accordion-item.active .arrow{
@@ -215,7 +227,7 @@ transform:rotate(-135deg);
 .accordion-content{
 max-height:0;
 overflow:hidden;
-transition:.4s;
+transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 background:rgba(244,241,234,.4);
 }
 
@@ -267,7 +279,7 @@ background:#333;
 color:#fff;
 text-decoration:none;
 text-align:center;
-padding:8px;
+padding:10px;
 border-radius:6px;
 font-weight:900;
 font-size:.6rem;
@@ -312,7 +324,6 @@ font-weight:900;
 letter-spacing:2px;
 }
 </style>
-
 </head>
 
 <body>
@@ -323,29 +334,23 @@ letter-spacing:2px;
 <div class="main-wrapper">
 
 <header>
-
 <div class="logo-box">
 <span class="char-typing char-m">M</span>
 <span class="char-typing char-r">R</span>
 </div>
-
 <div class="divider"></div>
-
 <div class="typing-wrapper">
 <h1 class="agency-title" id="shock-text"></h1>
 <div class="agency-subtitle">MASTER AGENCY INDONESIA</div>
 </div>
-
 <div class="work-hours-box">
 <span class="work-title">Jam Kerja Senin-Jum'at</span>
 <span class="work-time">08:00 - 17:00 WIB</span>
 <span class="slow-respon">SLOW RESPON SAMPAI WAKTU TIDAK DITENTUKAN!!</span>
 </div>
-
 </header>
 
 <div class="scroll-arrow"></div>
-
 <div class="accordion-grid" id="grid2"></div>
 
 <footer>
@@ -361,7 +366,6 @@ letter-spacing:2px;
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-
 particlesJS("particles-js",{
 particles:{
 number:{value:45},
@@ -378,21 +382,14 @@ const phrase="Master Management";
 let charIndex=0;
 
 function handleTypingOnce(){
-
 if(charIndex<phrase.length){
-
 textEl.innerText=phrase.substring(0,charIndex+1);
 charIndex++;
-
 setTimeout(handleTypingOnce,150);
-
 }else{
-
 textEl.classList.add("shock-effect");
 textEl.style.borderRight="none";
-
 }
-
 }
 
 setTimeout(()=>{
@@ -400,46 +397,17 @@ textEl.style.opacity=1;
 handleTypingOnce();
 },1500);
 
-
 const apps=[
-"PAPAYA LIVE",
-"WOO LIVE",
-"MOMA",
-"SUKA",
-"HOPO",
-"SERU",
-"DUKU",
-"omi",
-"NAGA LIVE",
-"KAKO LIVE",
-"lucky koin",
-"YAMEET",
-"DIKA",
-"LIVCHAT",
-"VONE",
-"HUBUNGI AGENCY"
+"PAPAYA LIVE","WOO LIVE","MOMA","SUKA","HOPO","SERU","DUKU","omi",
+"NAGA LIVE","KAKO LIVE","lucky koin","YAMEET","DIKA","LIVCHAT","VONE",
+"Momo", "HUBUNGI AGENCY"
 ];
-
 
 const codes=[
-"G315411",
-"139777",
-"1341709",
-"ML53",
-"200698",
-"3C332B67",
-"A6C33848A",
-"G2TAF99",
-"A5BDE44B3",
-"170796",
-"518645",
-"407961",
-"1206",
-"ganita",
-"my id:16784525",
-null
+"G315411","139777","1341709","ML53","128142","3C332B67","A6C33848A",
+"G2TAF99","A5BDE44B3","170796","518645","407961","1206","ganita",
+"my id:16784525","1949211542", null
 ];
-
 
 const links={
 "WOO LIVE":"https://s.woolive.tv/t/o4b3En",
@@ -447,102 +415,74 @@ const links={
 "lucky koin":"https://dl.yydsco.com/luckyplus.apk",
 "YAMEET":"https://ym.nanas.vip/chat/download",
 "DIKA":"https://play.google.com/store/apps/details?id=com.dika.mobile",
-
 "LIVCHAT":"https://iconlink.vmatchs.com/#/pages/invite/hostess/hostess?id=1939237421778599936&name=Ganita&endTime=abbvgcvlchhha&guild=child&country=Indonesia&currentAgent=echolive",
-
 "VONE":"https://invite-vone.com/DkPM5M"
 };
-
 
 const grid=document.getElementById("grid2");
 
 apps.forEach((app,i)=>{
-
 let content="";
-
 const waNumber="628883007987";
-
 const waLink=`https://wa.me/${waNumber}?text=Halo%20Agency%20saya%20ingin%20konsultasi%20gratis`;
 
 if(app==="HUBUNGI AGENCY"){
-
 content=`<a href="${waLink}" target="_blank" class="app-link-btn wa-btn">CHAT WHATSAPP - KONSULTASI GRATIS</a>`;
-
 }else{
-
-let downloadBtn=
-links[app]?
-`<a href="${links[app]}" target="_blank" class="app-link-btn">UNDUH</a>`
-:"";
-
-content=`
-
+let downloadBtn= links[app]? `<a href="${links[app]}" target="_blank" class="app-link-btn">UNDUH</a>` : "";
+let codeContent = codes[i] ? `
 <span class="code-label">KODE AGENCY ↓</span>
-
 <div class="code-box">
 <span class="code-display" id="c${i}">${codes[i]}</span>
-
 <button class="copy-btn" onclick="copyIt('c${i}',this)">SALIN</button>
-</div>
+</div>` : "";
 
-${downloadBtn}
-
-`;
-
+content = `${codeContent} ${downloadBtn}`;
 }
 
 grid.innerHTML+=`
-
 <div class="accordion-item">
-
 <button class="accordion-header" onclick="toggleAcc(this)">
 ${app}
 <span class="arrow"></span>
 </button>
-
 <div class="accordion-content">
 ${content}
 </div>
-
 </div>
-
 `;
-
 });
 
-
+// LOGIKA BUKA TUTUP OTOMATIS (SANGAT TELITI)
 function toggleAcc(el){
+const parent = el.parentElement;
+const allItems = document.querySelectorAll(".accordion-item");
+const isActive = parent.classList.contains("active");
 
-const parent=el.parentElement;
-
-document.querySelectorAll(".accordion-item")
-
-.forEach(item=>{
-if(item!==parent)
-item.classList.remove("active")
+// 1. Paksa tutup SEMUA kolom tanpa terkecuali
+allItems.forEach(item => {
+item.classList.remove("active");
 });
 
-parent.classList.toggle("active");
-
+// 2. Jika kolom yang diklik tadi tidak aktif, sekarang buka dia
+if(!isActive) {
+parent.classList.add("active");
+// 3. Scroll agar kolom yang dibuka terlihat jelas
+setTimeout(() => {
+parent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}, 200);
 }
-
+}
 
 function copyIt(id,btn){
-
 const txt=document.getElementById(id).innerText;
-
-navigator.clipboard.writeText(txt)
-
-.then(()=>{
-
+navigator.clipboard.writeText(txt).then(()=>{
 btn.innerText="OK";
-
-setTimeout(()=>btn.innerText="SALIN",1000);
-
+setTimeout(()=> {
+btn.innerText="SALIN";
+},1000);
 });
-
 }
-
 </script>
 
 </body>
